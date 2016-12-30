@@ -1,0 +1,23 @@
+# Troubleshooting pulseaudio
+
+https://wiki.archlinux.org/index.php/PulseAudio/Troubleshooting#Muted_audio_device
+
+No audio, even though alsamixer is full, pulse might mute the sound.
+This happens occasionally, especially if playing slightly corrupted sound files and/or audio with embedded cover art.
+
+	amixer -D pulse set Master 1+ unmute
+
+Pulse application still might mute itself though
+
+	pacmd list-sink-inputs
+
+Find and make note of the index of the corresponding sink input. The properties: application.name and application.process.binary, among others, should help here. Ensure sane settings are present, specifically those of muted and volume. If the sink is muted, it can be unmuted by:
+
+	pacmd set-sink-input-mute <index> false
+
+If the volume needs adjusting, it can be set to 100% by:
+
+	pacmd set-sink-input-volume <index> 0x10000
+
+
+

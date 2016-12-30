@@ -1,0 +1,23 @@
+# Create video loop out of short video fragments using ffmpeg
+
+Make a text file. Contents of an example text file to repeat 4 times.
+
+	$ cat list.txt
+	file 'input.mp4'
+	file 'input.mp4'
+	file 'input.mp4'
+	file 'input.mp4'
+
+Then run ffmpeg:
+
+	ffmpeg -f concat -i list.txt -c copy output.mp4
+
+This example is the same as above but you don't have to manually make list.txt:
+
+	for i in {1..4}; do printf "file '%s'\n" input.mp4 >> list.txt; done
+	ffmpeg -f concat -i list.txt -c copy output.mp4
+
+With most commonly-used modern shells, you can even avoid the creation of the list.txt file entirely. For example, with bash:
+
+	ffmpeg -f concat -i <(for i in {1..4}; do printf "file '%s'\n" input.mp4; done) -c copy output.mp4
+

@@ -1,0 +1,15 @@
+# Socks5 proxy
+
+ (using an example port number: any other port > 1024 will do):
+
+1. from your pc, ssh to proxyserver forwarding port 9876:
+
+	user@localhost$ ssh -L9876:127.0.0.1:9876 user@proxyserver
+
+2. once done, create a socks proxy in test server
+
+	user@proxyserver$ ssh -D9876 172.16.105.5
+
+3. configure your browser setting localhost:9876 as socks5 proxy
+
+

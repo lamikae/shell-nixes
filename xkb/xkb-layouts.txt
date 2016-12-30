@@ -1,0 +1,43 @@
+# Add custom keyboard layout
+
+# Sources:
+	https://ubuntuforums.org/showthread.php?t=1387812
+	http://people.uleth.ca/~daniel.odonnell/Blog/custom-keyboard-in-linuxx11
+
+Locate XKB install directory
+
+  ls /usr/share/X11/xkb/
+
+Copy mingo layout file to symbols/ directory. To add the input to drop down menus, add this xml segment to rules/evdev.xml
+
+  cp mingo /usr/share/X11/xkb/symbols/
+  vim /usr/share/X11/xkb/rules/evdev.xml
+
+    <layout>
+      <configItem>
+        <name>mingo</name>
+        <shortDescription>mingo</shortDescription>
+        <description></description>
+        <languageList><iso639Id>fi</iso639Id></languageList>
+      </configItem>
+      <variantList>
+        <variant>
+          <configItem>
+            <name>basic-mingo</name>
+            <description>Mingo</description>
+          </configItem>
+        </variant>
+      </variantList>
+    </layout>
+
+vim /usr/share/X11/xkb/rules/evdev.lst # add under ! layout
+
+  mingo           Mingo
+
+Clear the cache, set the keymap from command line to test it works
+
+  sudo rm -f /var/lib/xkb/*.xkm
+  sudo dpkg-reconfigure xkb-data
+  setxkbmap mingo
+
+To add the input to drop-down menu, go to Settings -> Keyboard -> Layout settings -> Input Sources -> Add ...

@@ -1,0 +1,11 @@
+# Append to $HOME/.bashrc
+
+source $HOME/.bashrc-git
+source $HOME/.aliasrc
+
+# don't put duplicate lines or lines starting with space in the history.
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+

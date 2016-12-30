@@ -1,0 +1,21 @@
+default  partial alphanumeric_keys
+xkb_symbols "basic-mingo" {
+
+    include "fi"
+
+    name[Group1]="Mingo";
+
+    key <AD03>  { [ e,   E,  U0119, U0118 ] };
+    key <AD09>  { [ o,   O,  U01EB, U01EA ] };
+    // key <AD07> { [  u,   U,  u+U0341 TODO,  U     ] };
+    key <AC11> { [  ae,  AE,  adiaeresis,  Adiaeresis  ] };
+    key <AD12> { [  U00B7,      asciicircum,      asciitilde,           diaeresis       ] };
+    key <BKSL> { [  U02C0,      asterisk,         apostrophe,		dead_acute 	] };
+    key <AE12> { [  U0341,      dead_grave,       dead_cedilla,         dead_ogonek     ] };
+
+    // Ö key <AC10> { [  odiaeresis,      Odiaeresis,       oslash,                Oslash                ] };
+
+    key <RALT>  { type[Group1]="TWO_LEVEL",
+                  [ ISO_Level3_Shift, Multi_key ]   };
+    modifier_map Mod5   { <RALT> };
+};

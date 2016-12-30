@@ -1,0 +1,46 @@
+# Create a simple video DVD of a single ts (transport stream) file
+
+You have a DVB transport stream capture video.ts
+
+1. First cut and demux with projectx
+   This will create bunch of files, most important are m2v, mp2, sup
+
+2. Then mux the video and audio streams to vob
+
+  tcmplex-panteltje -i "${DEMUXED}.m2v" -p "${DEMUXED}.mp2" \
+  -m d -d $VERBOSITY -o "video.vob"
+
+3. Once you have the vobs create the dvd menus with a graphical tool or
+   the simplest way to put one stream, no menus or anything fancy, using dvdauthor:
+
+  VIDEO_FORMAT=pal dvdauthor -x dvdauthor.xml -o OUT
+
+The OUT directory must exist. Use can use this base xml
+
+	<?xml version="1.0"?>
+	<dvdauthor>
+	<vmgm />
+	<titleset>
+	<titles>
+	<video widescreen="nopanscan" aspect="16:9" format="pal" />
+	<audio lang="fi"/>
+	<pgc>
+	<vob file="video.vob" />
+	</pgc>
+	</titles>
+	</titleset>
+	</dvdauthor>
+
+for 4:3 videos,
+	<video widescreen="noletterbox" aspect="4:3" format="pal" />
+
+4. Then you have directory OUT, try it out with dvd player
+
+	xine "dvd:`pwd`/OUT"
+
+5. Burn this as is or create an iso file
+
+	growisofs -dvd-compat -Z /dev/cdrom -dvd-video OUT
+or
+	mkisofs -dvd-video -udf -o dvd.iso OUT
+

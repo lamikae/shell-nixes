@@ -1,0 +1,25 @@
+Managing file history ; version control ; git
+
+Once you have learned to feel natural in speaking the sh language, you may think you would like to have a change log of your files.
+
+This is what git is for, and while it can be a terribly complicated tool, its basic usage is very simple and intuitive.
+
+Should you ever get into any programming, you should know how to use a version control to keep track of how your code has changed and tag the versions that work. So you can see exactly what has changed when it doesn't. Version control works best on plain text files, not so well with office documents.
+
+  mkdir hello-world
+  cd hello-world
+  git init .
+
+Now your git repository is ready for the first commit.
+
+  touch .gitignore
+  git add .gitignore
+  git commit -m'First commit; added empty ignore file'
+
+This will be your first commit of many. Git may complain or even refuse to commit without any username set.
+You can do so by supplying this config into either global ~/.gitconfig or .git/config of this project.
+
+  [user]
+  name = your nickname
+  email = me@here
+

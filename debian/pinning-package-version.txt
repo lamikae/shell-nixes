@@ -1,0 +1,19 @@
+# Pinning django v1.4 down so it will not be upgraded
+
+ $ dpkg-query -l '*django*'
+Desired=Unknown/Install/Remove/Purge/Hold
+| Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
+|/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)
+||/ Name           Version      Architecture Description
++++-==============-============-============-=================================
+ii  python-django  1.4.5-1+deb7 all          High-level Python web development
+ga
+
+Need to pin this version down
+
+sudo vim /etc/apt/preferences.d/django
+
+Package: python-django
+Pin: version 1.4*
+Pin-Priority: 550
+

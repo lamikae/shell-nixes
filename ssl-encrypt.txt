@@ -1,0 +1,5 @@
+Encrypt a file:
+openssl des3 -salt -in file.txt -out encryptedfile.txt
+
+Decrypt a file:
+openssl des3 -d -salt -in encryptedfile.txt -out file.txt

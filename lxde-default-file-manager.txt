@@ -1,0 +1,28 @@
+# Change Nautilus to be the default file manager for LXDE
+
+Change the contents of /etc/xdg/lxsession/LXDE/autostart as shown below.
+
+From
+
+@xscreensaver -no-splash
+@setxkbmap -option grp:switch,grp:alt_shift_toggle,grp_led:scroll us,ar
+@lxpanel --profile LXDE
+@pcmanfm --desktop --profile LXDE 
+@/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+
+To
+
+@xscreensaver -no-splash
+@setxkbmap -option grp:switch,grp:alt_shift_toggle,grp_led:scroll us,ar
+@lxpanel --profile LXDE
+@/usr/bin/nautilus -n
+@/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+
+Also you can take a look at https://help.ubuntu.com/community/DefaultFileManager to see if it might help.
+
+Other helpful commands:
+
+	xdg-mime default nautilus.desktop inode/directory application/x-gnome-saved-search
+
+	xdg-mime query default inode/directory
+
